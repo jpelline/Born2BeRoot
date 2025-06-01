@@ -5,10 +5,10 @@ echo -n "#Architecture: "; uname -a
 
 # The number of physical processors.
 echo -n "#CPU physical : "
-lscpu | grep "^Socket(s):" | awk '{print $2}'
+grep "physical id" /proc/cpuinfo | sort -u | wc -l
 
 # The number of virtual processors.
-echo -n "#vCPU : "; nproc
+echo -n "#vCPU : "; nproc --all
 
 # The current available RAM on your server and its utilization rate as a percentage.
 echo -n "#Memory Usage: "
@@ -47,4 +47,3 @@ echo "#Network: IP $ip_address $mac_address"
 # The number of commands executed with sudo
 cmd=$(grep -c 'COMMAND=' /var/log/sudo/sudo.log)
 echo "#Sudo : $cmd cmd"
-
